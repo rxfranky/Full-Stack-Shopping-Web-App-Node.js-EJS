@@ -1,0 +1,22 @@
+<%- include('./includes/Header') %>
+    <!-- <div class="bg-purple-400 w-[80vw] m-auto rounded-md mt-7 p-3"> -->
+    <% orders.forEach((order)=>{ %>
+
+        <p class="font-bold bg-purple-400 w-[80vw] m-auto rounded-md mt-7 p-3">Order id- <%= order.orderId %>
+                <a class="ml-180" href="http://localhost:3000/download/<%= order.orderId %>">Download invoice</a>
+        </p>
+
+        <% }) %>
+            <!-- <div class="flex justify-between">
+            <div class="flex flex-col gap-2 h-fit ml-7">
+                <span>prod -1 price-199</span>
+                <span>prod -2 price-199</span>
+                <span>prod -3 price-199</span>
+            </div>
+            <span class="font-bold mr-7">Total Amount- $1200</span>
+        </div> -->
+            <!-- </div> -->
+
+            </body>
+
+            </html>

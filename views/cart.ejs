@@ -1,0 +1,47 @@
+<%- include('./includes/Header') %>
+    <div class="flex gap-3 flex-wrap mt-12 justify-center w-[90vw] m-auto">
+        <% items.forEach((item)=>{ %>
+            <div class="bg-green-200 flex w-[300px] flex-col p-7 rounded-lg justify-center items-center gap-3">
+                <img width="150px" src="http://localhost:3000/<%= item.imageUrl %>" alt="">
+                <h1 class="text-xl font-bold">
+                    <%= item.title %>
+                </h1>
+                <span>$<%= item.price %></span>
+                <p class="font-semibold overflow-hidden h-[24px]">
+                    <%= item.desc %>
+                </p>
+                <p>
+                    quantity-<%= item.quantity %>
+                </p>
+                <div class="flex gap-3 justify-center items-center flex-col ">
+                    <div class="flex gap-7">
+                        <form action="/deleteItem" method="POST">
+                            <input type="hidden" name="id" value="<%= item._id.toString() %>">
+                            <button
+                                class="bg-black p-1 pl-3 pr-3 font-semibold cursor-pointer text-white rounded-md">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+    <div class="bg-gray-400 rounded-lg text-white flex flex-col justify-center items-center gap-5 absolute right-[60px] bottom-[75px] w-[250px] h-[250px]">
+
+        <span class="font-semibold text-black text-center">
+            <%
+            let totalPrice=0; 
+            items.forEach((item)=>{ 
+            totalPrice=totalPrice+item.quantity*item.price
+            %>
+            <p><%=item.title%>- $<%= item.quantity*item.price%></p>
+            <% }) %>
+           <p class="mt-4 font-bold">Total Amount- $<%= totalPrice %></p>
+        </span>
+        <form action="/payment" method="post">
+            <input type="hidden" value="<%= totalPrice %>" name="amount">
+            <button class="bg-black p-1 pl-3 pr-3 font-semibold cursor-pointer text-white rounded-md ">checkout</button>
+        </form>
+    </div>
+    </body>
+
+    </html>

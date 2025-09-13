@@ -1,0 +1,35 @@
+<%- include('./includes/Header') %>
+    <div class=" mt-5 w-full justify-center flex">
+        <form action="/admin/addProduct/<% if(isEdit) { %><%= id %><% } else {%><%= "!edit" %> <% } %>"
+            enctype="multipart/form-data" method="POST"
+            class="flex flex-col gap-4 bg-red-200 p-10 pl-22 pr-22 rounded-lg">
+            <div class="flex flex-col gap-1">
+                <label class="font-bold text-xl" for="title">Title</label>
+                <input class="p-1 pl-3 border-[1.5px] rounded-md" id="title" type="text" name="title"
+                    placeholder="title" value="<% if(isEdit){ %><%= product.title %><% } else {%><%= "" %> <% } %>">
+            </div>
+            <div class="flex flex-col gap-1">
+                <label class="font-bold text-xl" for="price">Price</label>
+                <input class="p-1 pl-3 border-[1.5px] rounded-md" id="price" type="text" name="price"
+                    placeholder="price" value="<% if(isEdit){ %><%= product.price %><% } else {%><%= "" %> <% } %>">
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label class="font-bold text-xl" for="desc">Description</label>
+                <input class="p-1 pl-3 border-[1.5px] rounded-md" id="desc" type="text" name="desc"
+                    placeholder="description"
+                    value="<% if(isEdit){ %><%= product.desc %><% } else {%> <%="" %> <% } %>">
+            </div>
+            <div class="flex flex-col gap-1">
+                <label class="font-bold text-xl" for="image">Image</label>
+                <input class="cursor-pointer" type="file" id="image" name="image">
+            </div>
+            <div class=" text-center">
+                <button class="bg-black p-1 pl-3 pr-3 font-semibold cursor-pointer text-white rounded-md">Submit
+                </button>
+            </div>
+        </form>
+    </div>
+    </body>
+
+    </html>

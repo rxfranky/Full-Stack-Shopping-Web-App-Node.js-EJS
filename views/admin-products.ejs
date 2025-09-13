@@ -1,0 +1,39 @@
+<%- include('./includes/Header') %>
+    <div class="flex gap-3 flex-wrap mt-12 justify-center w-[90vw] m-auto">
+        <% products.forEach((product)=>{ %>
+            <div class="bg-green-200 flex w-[300px] flex-col p-7 rounded-lg justify-center items-center gap-3">
+                <img width="150px" src="http://localhost:3000/<%= product.imageUrl %>" alt="">
+                <h1 class="text-xl font-bold">
+                    <%= product.title %>
+                </h1>
+                <span>$<%= product.price %></span>
+                <p class="font-semibold overflow-hidden h-[24px]">
+                    <%= product.desc %>
+                </p>
+                <div class="flex gap-3 justify-center items-center flex-col ">
+                    <div class="flex gap-7">
+                        <form action="/admin/deleteProduct" method="POST">
+                            <input type="hidden" name="id" value="<%= product._id.toString() %>">
+                            <button
+                                class="bg-black p-1 pl-3 pr-3 font-semibold cursor-pointer text-white rounded-md">Delete</button>
+                        </form>
+
+                        <form action="/admin/editProduct?edit=true" method="POST">
+                            <input type="hidden" name="id" value="<%= product._id.toString() %>">
+                            <button
+                                class="bg-black p-1 pl-3 pr-3 font-semibold cursor-pointer text-white rounded-md">Edit</button>
+                        </form>
+                    </div>
+
+                    <form action="/addToCart" method="POST">
+                        <input type="hidden" name="id" value="<%= product._id.toString() %>">
+                        <button class="bg-black p-1 pl-3 pr-3 font-semibold cursor-pointer text-white rounded-md">Add to
+                            cart</button>
+                    </form>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+    </body>
+
+    </html>

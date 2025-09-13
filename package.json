@@ -1,0 +1,35 @@
+{
+  "name": "node-js-complete-proj-self",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.5",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "connect-mongodb-session": "^5.0.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.2.1",
+    "mongoose": "^8.16.4",
+    "multer": "^2.0.2",
+    "nodejs-file-downloader": "^4.13.0",
+    "nodemailer": "^7.0.5",
+    "nodemon": "^3.1.10",
+    "pdfkit": "^0.17.1",
+    "razorpay": "^2.9.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "tailwindcss": "^4.1.11"
+  }
+}
