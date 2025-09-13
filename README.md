@@ -18,4 +18,5 @@ This is a **Shopping Web Application** built using **Node.js** and **EJS**. The 
 - **MongoDB**: Database for storing user and product data
 - **Authentication & Authorization**: Secure user access and role management
 - **Express Validator**: Ensures proper data input
+- **TailwindCSS**: For designing purposes 
 
