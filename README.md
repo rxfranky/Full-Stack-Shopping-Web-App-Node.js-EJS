@@ -16,5 +16,5 @@ This is a **Shopping Web Application** built using **Node.js** and **EJS**. The 
 - **Express.js**: Server framework
 - **MongoDB**: Database for storing user and product data
 - **Authentication & Authorization**: Secure user access and role management
-- **Validation**: Ensures proper data input
+- **Express Validator**: Ensures proper data input
 
