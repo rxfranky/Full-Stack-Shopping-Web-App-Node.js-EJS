@@ -1,5 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+
+dotenv.config({ path: '.env.local' })
+
 const adminRoutes = require('./routes/admin')
 const consumerRoutes = require('./routes/consumerRoutes')
 const bodyParser = require('body-parser')
@@ -7,9 +11,6 @@ const multer = require('multer')
 const session = require('express-session')
 const mongodbStore = require('connect-mongodb-session')(session)
 
-const dotenv = require('dotenv')
-
-dotenv.config({ path: '.env.local' })
 
 const app = express()
 
