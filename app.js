@@ -7,6 +7,10 @@ const multer = require('multer')
 const session = require('express-session')
 const mongodbStore = require('connect-mongodb-session')(session)
 
+const dotenv = require('dotenv')
+
+dotenv.config({ path: '.env.local' })
+
 const app = express()
 
 const store = new mongodbStore({
@@ -15,7 +19,7 @@ const store = new mongodbStore({
 })
 
 app.use(session({
-    secret: 'sessionsecret',
+    secret: process.env.sessionsecret,
     resave: false,
     saveUninitialized: false,
     store: store,
@@ -69,6 +73,7 @@ app.use('/', (req, res) => {
     })
 })
 
-mongoose.connect('mongodbUri')
+mongoose.connect(process.env.MDB_URI)
+console.log('mongo uro--', process.env.MDB_URI)
 
 app.listen(3000)

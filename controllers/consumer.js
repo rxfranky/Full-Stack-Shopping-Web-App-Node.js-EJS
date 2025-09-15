@@ -14,11 +14,11 @@ const { Downloader } = require('nodejs-file-downloader')
 
 
 var instance = new Razorpay({
-    key_id: 'razorpayKeyId',
-    key_secret: 'razorPayKeySecret',
+    key_id: process.env.Rpay_key_id,
+    key_secret: process.env.Rpay_key_secret,
 });
 
-sgMail.setApiKey('sendgridApiKey')
+sgMail.setApiKey(process.env.SG_API_KEY)
 
 exports.getProducts = (req, res, next) => {
     productModel.find()
