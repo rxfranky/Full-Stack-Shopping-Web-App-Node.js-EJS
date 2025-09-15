@@ -11,6 +11,8 @@ const pdfDocument = require('pdfkit')
 const fs = require('fs')
 const path = require('path')
 const { Downloader } = require('nodejs-file-downloader')
+const dotenv=require('dotenv')
+dotenv.config({path: '.env.local'})
 
 
 var instance = new Razorpay({

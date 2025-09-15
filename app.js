@@ -14,7 +14,7 @@ dotenv.config({ path: '.env.local' })
 const app = express()
 
 const store = new mongodbStore({
-    uri: 'mongoDBUri',
+    uri: process.env.MDB_URI,
     collection: 'session'
 })
 
@@ -74,6 +74,5 @@ app.use('/', (req, res) => {
 })
 
 mongoose.connect(process.env.MDB_URI)
-console.log('mongo uro--', process.env.MDB_URI)
 
 app.listen(3000)
