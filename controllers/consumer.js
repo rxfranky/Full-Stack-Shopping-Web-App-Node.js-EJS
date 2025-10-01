@@ -3,7 +3,7 @@ const cartModel = require('../models/cart')
 const userModal = require('../models/user')
 const bcrypt = require('bcrypt')
 const { validationResult } = require('express-validator')
-const sgMail = require('@sendgrid/mail')
+const nodemailer = require('nodemailer')
 const crypto = require('crypto')
 const Razorpay = require('razorpay')
 const orderModel = require('../models/orders')
@@ -18,7 +18,13 @@ var instance = new Razorpay({
     key_secret: process.env.Rpay_key_secret,
 });
 
-sgMail.setApiKey(process.env.SG_API_KEY)
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'mdtalha9434@gmail.com',
+        pass: process.env.GAP
+    }
+})
 
 exports.getProducts = (req, res, next) => {
     productModel.find()
@@ -180,15 +186,15 @@ exports.postSignup = (req, res) => {
                     .then((savedUser) => {
                         console.log('saved user- ', savedUser)
                         const msg = {
-                            from: 'sahidafridi0076@gmail.com',
+                            from: 'mdtalha9434@gmail.com',
                             to: savedUser.email,
                             subject: 'Signup successful',
                             text: 'Thanks for signing up pleasure to see you!',
                             html: '<h1>Thanks for signing up!</h1><p>Great to see you ahead its our pleasure</><p><span>Here is the login link- <a href="http://localhost:3000/login">Login here</a></span></p>'
                         }
-                        sgMail.send(msg)
-                            .then(() => {
-                                console.log('email sent')
+                        transporter.sendMail(msg)
+                            .then((info) => {
+                                console.log('email sent info-', info)
                             })
                             .catch((err) => {
                                 console.log('err in sending email- ', err)
@@ -329,9 +335,9 @@ exports.postReset = (req, res, next) => {
                             text: 'here you reset your password',
                             html: `<p>reset your password- <a href='http://localhost:3000/reset/${token}'>reset here</a></p>`
                         }
-                        sgMail.send(msg_2)
-                            .then(() => {
-                                console.log('email sent for reset password')
+                        transporter.sendMail(msg_2)
+                            .then((info) => {
+                                console.log('email sent for reset password-', info)
                             })
                             .catch((err) => {
                                 console.log('err in sending email for reset password- ', err)
@@ -427,21 +433,24 @@ exports.payment = (req, res, next) => {
     instance.orders.create(options, function (err, order) {
         console.log("created order is-", order, " and err is-", err);
         return res.render('checkout', {
-            order: order
+            order: order,
+            apiKey:process.env.Rpay_key_id
         })
     });
 }
 
 exports.saveOrder = (req, res, next) => {
-    const orderId = req.body.razorpay_order_id
+    const orderId = req.body.razorpay_order_id;
+    const email = req.session.user.email;
 
     const newOrder = new orderModel({
-        orderId: orderId
+        orderId: orderId,
+        email
     })
     newOrder.save()
         .then((savedOrder) => {
             console.log('new saved order-', savedOrder)
-            
+
             const document = new pdfDocument()
             document.pipe(fs.createWriteStream(path.join(__dirname, '..', 'invoices', `${savedOrder.orderId}.pdf`)))
             document.text('Order id- ' + savedOrder.orderId)
@@ -456,7 +465,9 @@ exports.saveOrder = (req, res, next) => {
 }
 
 exports.getOrders = (req, res, next) => {
-    orderModel.find()
+    const email = req.session.user.email;
+
+    orderModel.find({ email })
         .then((orders) => {
             let email = null;
             if (req.session.isLoggedIn) {

@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 
-dotenv.config({ path: '.env.local' })
+dotenv.config({ path: './.env.local' })
 
 const adminRoutes = require('./routes/admin')
 const consumerRoutes = require('./routes/consumerRoutes')
