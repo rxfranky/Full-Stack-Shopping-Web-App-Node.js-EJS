@@ -6,7 +6,7 @@ This is a **Shopping Web Application** built using **Node.js** and **EJS**. The 
 
 - **User Authentication & Authorization**: Secure login and registration system.
 - **Validation**: Input validation to ensure data integrity.
-- **Email**: Used SendGrid for email management.
+- **Email**: Used Nodemailer with Gmail for email management.
 - **Product Management**: Users can view and interact with products.
 - **Payment Integrated(Razorpay)**: Users can make payment also.
 
